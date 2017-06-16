@@ -57,6 +57,38 @@ module.exports = {
    /**
    * `StudentController.update()`
    */
+  // update: function (req, res) {
+  //
+  //   if(req.method != "POST"){
+  //
+  //     client.get(endpoint, function (data, response) {
+  //       return res.view('update', {students: data});
+  //     }).on('error', function (err) {
+  //         return res.view('update', {error: { message: "There was an error getting the students"}});
+  //     });
+  //
+  //   }else{
+  //
+  //     var args = {
+  //         data: req.body,
+  //         headers: { "Content-Type": "application/json" }
+  //     };
+  //
+  //     client.put(endpoint + "/" + req.body.id, args, function (data, response) {
+  //
+  //       if(response.statusCode != "200"){
+  //           req.addFlash("error", data.message);
+  //           return res.redirect('/update');
+  //       }
+  //
+  //       req.addFlash("success", "Record updated successfully");
+  //       return res.redirect('/update');
+  //
+  //     })
+  //
+  //   }
+  // },
+
   update: function (req, res) {
 
     if(req.method != "POST"){
@@ -69,12 +101,15 @@ module.exports = {
 
     }else{
 
+      let studentId = req.body.student_id;
+      delete req.body.student_id;
+
       var args = {
           data: req.body,
           headers: { "Content-Type": "application/json" }
       };
 
-      client.put(endpoint + "/" + req.body.id, args, function (data, response) {
+      client.put(endpoint + "/" + studentId, args, function (data, response) {
 
         if(response.statusCode != "200"){
             req.addFlash("error", data.message);

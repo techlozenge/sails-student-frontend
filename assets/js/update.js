@@ -6,26 +6,26 @@
  * 1. When the page is loaded all form fields should be disabled except
  *    for the dropdown to select a student
  *
- * 2. Using the bootstrap-selct plugin render dropdown on the page
+ * DONE 2. Using the bootstrap-selct plugin render dropdown on the page
  *
- * 3. Use the live search functionality to make the dropdown searchable
+ * DONE 3. Use the live search functionality to make the dropdown searchable
  *
- * 4. Add the user glyphicons next to each student in the list
+ * DONE 4. Add the user glyphicons next to each student in the list
  *
- * 6. Add a menu header to the dropdown
+ * DONE 6. Add a menu header to the dropdown
  *
- * 7. Customize further with anything you find intersting
+ * DONE 7. Customize further with anything you find intersting
  *
  * 8. When an student is selected the form fields should be enabled
       and populated with the data for the selected student
  *
- * 9. Use jQuery validate and add validation to the form with the following requirements
+ * DONE 9. Use jQuery validate and add validation to the form with the following requirements
  *    First Name - required, at least 2 characters
  *    Last Name  - required, at least 2 characters
  *	  start_date - make sure date is yyyy-mm-dd
  *	  ADD any other validation that makes you happy
  *
- * 10. Make the color of the error text red
+ * DONE 10. Make the color of the error text red
  *
  *
  *
@@ -44,8 +44,66 @@
 
    $(function(){
 
-    //code goes here
+      // disable our form prior to selecting a student
+      $("#updateStudentForm :input").prop("disabled", true);
+
+      // when the submit button is clicked disable the fields again until the next selection
+      $(".btn .btn-default").click(function(){
+         $("#updateStudentForm :input").prop("disabled", true);
+      })
+
+      // Student is selected so perform an ajax call to populate the record
+      // https://api.jquery.com/change/
+      $( ".selectpicker" ).change(function() {
+         console.log("selectpicker event fired");
+         //https://api.jquery.com/select/
+         //https://learn.jquery.com/using-jquery-core/faq/how-do-i-get-the-text-value-of-a-selected-option/
+         $( "select option:selected" ).each(function() {
+
+            $("#updateStudentForm :input").prop("disabled", false);
+            let id = "";
+            let url = "";
+
+            id = $( this ).val();
+            url = "http://localhost:1337/student/" + id;
+            console.log(url);
+
+            $.get(url, function( data ) {
+
+               $.each(data, function(name, value) {
+
+                  var $el = $('[name="'+name+'"]'),
+                  name = $el.attr('name');
+
+                  console.log("name: " + name + " value: " + value);
+
+                  switch(name) {
+                     case 'student_id':
+                        $el.val(value);
+                        break;
+                     case 'first_name':
+                        $el.val(value);
+                        break;
+                     case 'last_name':
+                        $el.val(value);
+                        break;
+                     case 'start_date':
+                        $el.val(value);
+                        break;
+                     case 'gpa':
+                        $el.val(value);
+                        break;
+                     case 'sat':
+                        $el.val(value);
+                        break;
+                     case 'major_id':
+                        $el.val(value);
+                        break;
+                     }
+               }) // end each
+            }); // end get
+         }); // end select
+      }); // end change event event
 
    })
-
  })();

@@ -31,11 +31,17 @@
  */
 
  (function(){
-
    $(function(){
 
-   	//code goes here
+
+        $('#studentTable').DataTable({
+          colReorder: true,
+          "scrollX": true,
+          dom: 'Bfrtip',
+          buttons: [
+              'copy', 'csv', 'excel', 'pdf', 'print'
+          ]
+        });
 
    })
-
  })();
