@@ -16,8 +16,7 @@
  *
  * DONE 7. Customize further with anything you find intersting
  *
- * 8. When an student is selected the form fields should be enabled
-      and populated with the data for the selected student
+ * DONE 8. When an student is selected the form fields should be enabled and populated with the data for the selected student
  *
  * DONE 9. Use jQuery validate and add validation to the form with the following requirements
  *    First Name - required, at least 2 characters

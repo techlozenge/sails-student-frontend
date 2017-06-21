@@ -42,9 +42,20 @@
         start_date: {
           required: true,
           dateISO: true
+        },
+        gpa: {
+          required: true,
+          minlength: 2
+        },
+        sat: {
+          required: true,
+          minlength: 3
+        },
+        major_id: {
+          required: true,
+          minlength: 1
         }
       },
-
       messages: {
         first_name: {
           required: "The first name is a required field",
@@ -55,8 +66,20 @@
           minlength: "The last name must be a minimum of two characters"
         },
         start_date: {
-          required: "The start date is a required field",
+          required: "The start date is a required field and must be in YYYY-MM-DD format",
           minlength: "The start date must be in YYYY-MM-DD format"
+        },
+        gpa: {
+          required: "The student GPA is a required field",
+          minlength: "Please enter the student GPA"
+        },
+        sat: {
+          required: "The student SAT score is a required field",
+          minlength: "Please enter the student GPA as a 3 or 4 digit value"
+        },
+        major_id: {
+          required: "The students Major ID number is a required field",
+          minlength: "Please enter the students Major ID number"
         }
 
       },
